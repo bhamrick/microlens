@@ -10,7 +10,7 @@ license-file:        LICENSE
 author:              Brian Hamrick
 maintainer:          brian.c.hamrick@gmail.com
 -- copyright:           
-category:            Data
+category:            Lenses
 build-type:          Simple
 -- extra-source-files:  
 cabal-version:       >=1.10
