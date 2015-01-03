@@ -8,18 +8,24 @@ type LensLike' f s a = LensLike f s s a a
 
 view :: LensLike (Const a) s t a b -> s -> a
 view l = getConst . l Const
+{-# INLINE view #-}
 
 over :: LensLike Identity s t a b -> (a -> b) -> s -> t
 over l f = runIdentity . l (Identity . f)
+{-# INLINE over #-}
 
 set :: LensLike Identity s t a b -> b -> s -> t
 set l = over l . const
+{-# INLINE set #-}
 
 _1 :: Functor f => LensLike f (a, x) (b, x) a b
 _1 f (a, x) = fmap (flip (,) x) (f a)
+{-# INLINE _1 #-}
 
 _2 :: Functor f => LensLike f (x, a) (x, b) a b
 _2 f (x, a) = fmap ((,) x) (f a)
+{-# INLINE _2 #-}
 
 lens :: Functor f => (s -> a) -> (s -> b -> t) -> LensLike f s t a b
 lens get set f s = fmap (set s) (f (get s))
+{-# INLINE lens #-}
