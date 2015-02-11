@@ -6,7 +6,8 @@ import Data.Functor.Identity
 type LensLike f s t a b = (a -> f b) -> s -> f t
 type LensLike' f s a = LensLike f s s a a
 
-view :: LensLike (Const a) s t a b -> s -> a
+-- The use of s s a a rather than s t a b improves type inference.
+view :: LensLike (Const a) s s a a -> s -> a
 view l = getConst . l Const
 {-# INLINE view #-}
 
